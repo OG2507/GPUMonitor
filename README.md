@@ -2,9 +2,17 @@
 
 [![Build](https://github.com/OG2507/GPUMonitor/actions/workflows/build.yml/badge.svg)](https://github.com/OG2507/GPUMonitor/actions/workflows/build.yml)
 
-GPU Sentinel is a small, always-on-top Windows overlay for keeping an eye on an NVIDIA GPU while you work. It shows temperature, GPU load, VRAM usage, and power draw; warns when heat or memory pressure becomes unsafe; and keeps a rolling telemetry history for diagnosing crashes.
+GPU Sentinel is a small, always-on-top NVIDIA GPU monitor for ComfyUI, local AI and other GPU-heavy Windows workloads. It keeps temperature, load, VRAM and power visible, warns when a reading genuinely needs attention, and records what happened before a problem.
 
-It is intentionally simple: put it in a corner, move it whenever you like, and otherwise forget about it until a reading needs your attention.
+It is intentionally simple: put it in a corner, move it wherever you like, and otherwise forget about it until it has something useful to tell you.
+
+## Built for ComfyUI and local AI
+
+GPU Sentinel grew out of repeated instability during demanding ComfyUI workflows. Large checkpoints, ControlNets, upscalers and image-to-video models can fill VRAM quickly or keep a GPU busy for a long queue. When the driver resets or the computer becomes unstable, the useful evidence often disappears with it.
+
+The overlay keeps the important readings in sight without covering your workflow or making you switch to a full monitoring dashboard. It is particularly useful if you are new to local AI and still learning what normal GPU behaviour looks like.
+
+It works just as well alongside Stable Diffusion interfaces, local LLMs, Blender, rendering software and games. ComfyUI is the reason it exists, not a restriction on where it can help.
 
 ## Download
 
@@ -22,6 +30,17 @@ Because community builds are not yet code-signed, Windows SmartScreen may ask yo
 - Logs readings to daily CSV files and automatically retains the last 30 days.
 - Remembers its monitor position, supports adjustable opacity and thresholds, and can start with Windows.
 - Continues running in the notification area if the overlay is hidden with Alt+F4.
+
+## Reading the overlay
+
+| Reading | What it tells you |
+| --- | --- |
+| **Temperature** | How hot the GPU is. Sustained heat is more important than a brief spike. |
+| **GPU load** | How busy the processor is. A ComfyUI queue can legitimately use 100%; high load alone is not a fault. |
+| **VRAM** | How much dedicated GPU memory is in use. Large models and high-resolution workflows can leave very little headroom. |
+| **Power** | Current power draw compared with the GPU's configured limit. Reaching the limit can be normal under a heavy workload. |
+
+Green means normal, blue means a heavy but healthy workload, amber means warning, red means critical, and grey means the NVIDIA driver is not currently providing readings.
 
 ## Requirements
 
